@@ -17,11 +17,11 @@ fn main() -> Result<(), DriverError> {
     let kernel = kernels.first().unwrap();
 
     println!("loading...");
-    dev.load_ptx(kernel.clone(), "rust_kernel", &["thread_id"])?;
+    dev.load_ptx(kernel.clone(), "rust_kernel", &["run_length", "thread_id"])?;
     println!("loaded!");
 
-    const GRID: u32 = 32;
-    const BLOCK: u32 = 32;
+    const GRID: u32 = 64;
+    const BLOCK: u32 = 256;
     const N: u32 = GRID * BLOCK;
 
     // https://developer.nvidia.com/blog/cuda-pro-tip-occupancy-api-simplifies-launch-configuration/
